@@ -1,5 +1,7 @@
 # Missing "has-tests" label
 
+The cluster has a `source-test-to-url` supply chain but we don't have the corresponding `has-tests` label for our workload.
+
 ## Command to try
 
 ```
