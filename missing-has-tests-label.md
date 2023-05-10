@@ -56,8 +56,10 @@ To see logs: "tanzu apps workload tail tanzu-java-web-app --timestamp --since 1h
 
 Query cluster for available supply chains and determine how to match them
 
+```sh
+kubectl get clustersupplychain -o jsonpath='{range .items[*]}{@.metadata.name}{" "}{@.spec.selector}{" "}{@.spec.selectorMatchExpressions}{" "}{@.spec.selectorMatchFields}{"\n"}{end}'
 ```
-% kubectl get clustersupplychain -o jsonpath='{range .items[*]}{@.metadata.name}{" "}{@.spec.selector}{" "}{@.spec.selectorMatchExpressions}{" "}{@.spec.selectorMatchFields}{"\n"}{end}'
+```text
 source-test-to-url {"apps.tanzu.vmware.com/has-tests":"true"} [{"key":"apps.tanzu.vmware.com/workload-type","operator":"In","values":["web","server","worker"]}] 
 testing-image-to-url  [{"key":"apps.tanzu.vmware.com/workload-type","operator":"In","values":["web","server","worker"]}] [{"key":"spec.image","operator":"Exists"}]
 ```

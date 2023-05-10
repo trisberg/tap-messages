@@ -229,13 +229,13 @@ And the new deployer App still has some clue in the status:
 
 Create a service claim for the database:
 
-```
+```sh
 tanzu service class-claim create customer-database --class postgresql-unmanaged -n default
 ```
 
 and hope that everything eventually reconciles and we have the app up and running.
 
-```
+```text
 % tanzu apps workload get customer-profile                                       
 📡 Overview
    name:        customer-profile
