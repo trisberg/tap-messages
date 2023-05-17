@@ -4,7 +4,7 @@ Deploying an app that uses a service binding but forgetting to create the servic
 
 ## Command to try
 
-```
+```sh
 tanzu apps workload create customer-profile \
   --git-repo https://github.com/trisberg/java-rest-service \
   --git-branch main \
@@ -21,8 +21,10 @@ tanzu apps workload create customer-profile \
 
 ### Tanzu CLI
 
+```sh
+% tanzu apps workload get customer-profile
 ```
-% tanzu apps workload get customer-profile                                             
+```text
 📡 Overview
    name:        customer-profile
    type:        web
@@ -71,8 +73,10 @@ To see logs: "tanzu apps workload tail customer-profile --timestamp --since 1h"
 
 It stays like this until the App resource times out after 15 min and then we see:
 
+```sh
+tanzu apps workload get customer-profile
 ```
-% tanzu apps workload get customer-profile
+```text
 📡 Overview
    name:        customer-profile
    type:        web
@@ -136,8 +140,10 @@ where there is a `CrashLoopBackOff` status on the deployed app.
 
 While waiting for the deployer App to time out, we can get the status from the `App` resource
 
+```sh
+kubectl get apps.kappctrl.k14s.io/customer-profile -ojsonpath='{.status.deploy}' | jq
 ```
-% kubectl get apps.kappctrl.k14s.io/customer-profile -ojsonpath='{.status.deploy}' | jq
+```text
 {
   "exitCode": 0,
   "finished": false,
@@ -158,8 +164,10 @@ which could tip us off that there is something up with the service binding.
 
 After the deployer App times out we can get the logs for the deployment pod
 
+```sh
+kubectl logs customer-profile-00001-deployment-68db7644b4-x4kpd
 ```
-% kubectl logs customer-profile-00001-deployment-68db7644b4-x4kpd
+```text
 Defaulted container "workload" out of: workload, queue-proxy
 Setting Active Processor Count to 4
 Calculating JVM memory based on 14585656K available memory
@@ -214,8 +222,10 @@ Consider the following:
 
 And the new deployer App still has some clue in the status:
 
+```sh
+kubectl get apps.kappctrl.k14s.io/customer-profile -ojsonpath='{.status.deploy}' | jq
 ```
-% kubectl get apps.kappctrl.k14s.io/customer-profile -ojsonpath='{.status.deploy}' | jq
+```text
 {
   "exitCode": 0,
   "finished": false,
@@ -235,8 +245,10 @@ tanzu service class-claim create customer-database --class postgresql-unmanaged 
 
 and hope that everything eventually reconciles and we have the app up and running.
 
+```sh
+tanzu apps workload get customer-profile                                       
+```
 ```text
-% tanzu apps workload get customer-profile                                       
 📡 Overview
    name:        customer-profile
    type:        web

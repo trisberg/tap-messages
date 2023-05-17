@@ -4,7 +4,7 @@ The cluster has a `source-test-to-url` supply chain but we don't have the corres
 
 ## Command to try
 
-```
+```sh
 tanzu apps workload create tanzu-java-web-app \
   --git-repo https://github.com/trisberg/tanzu-java-web-app \
   --git-branch main \
@@ -19,8 +19,10 @@ tanzu apps workload create tanzu-java-web-app \
 
 ### Tanzu CLI
 
-```
+```sh
 % tanzu apps workload get tanzu-java-web-app
+```
+```text
 📡 Overview
    name:        tanzu-java-web-app
    type:        web
@@ -70,9 +72,9 @@ Looks like `source-test-to-url` requires `{"apps.tanzu.vmware.com/has-tests":"tr
 
 Add this to the command:
 
-```
+```sh
 ...
-  --label apps.tanzu.vmware.com/has-tests: true \
+  --label apps.tanzu.vmware.com/has-tests=true \
 ...
 ```
 
