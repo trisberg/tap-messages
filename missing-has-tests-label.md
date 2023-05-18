@@ -20,7 +20,7 @@ tanzu apps workload create tanzu-java-web-app \
 ### Tanzu CLI
 
 ```sh
-% tanzu apps workload get tanzu-java-web-app
+tanzu apps workload get tanzu-java-web-app
 ```
 ```text
 📡 Overview

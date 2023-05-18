@@ -22,7 +22,7 @@ tanzu apps workload create customer-profile \
 ### Tanzu CLI
 
 ```sh
-% tanzu apps workload get customer-profile
+tanzu apps workload get customer-profile
 ```
 ```text
 📡 Overview
