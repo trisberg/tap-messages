@@ -2,6 +2,8 @@
 
 When deploying a workload and it is going through all the steps in the supply chain, there are messages for steps not yet run that look like there might be something wrong. This can be unsettling, especially for new developers.
 
+> JIRA Issue: https://jira.eng.vmware.com/browse/TANZUSC-3806
+
 ## Command to try
 
 ```sh
