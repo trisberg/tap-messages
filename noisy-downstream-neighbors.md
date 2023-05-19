@@ -39,30 +39,30 @@ which should show something like this:
    name:   source-test-to-url
 
    NAME               READY     HEALTHY   UPDATED   RESOURCE
-   source-provider    True      True      29s       gitrepositories.source.toolkit.fluxcd.io/tanzu-java-web-app
-   source-tester      True      True      3s        runnables.carto.run/tanzu-java-web-app
-   image-provider     Unknown   Unknown   3s        images.kpack.io/tanzu-java-web-app
-   config-provider    False     Unknown   33s       not found
-   app-config         False     Unknown   33s       not found
-   service-bindings   False     Unknown   33s       not found
-   api-descriptors    False     Unknown   33s       not found
-   config-writer      False     Unknown   33s       not found
+   source-provider    True      True      44s       imagerepositories.source.apps.tanzu.vmware.com/tanzu-java-web-app
+   source-tester      Unknown   Unknown   44s       runnables.carto.run/tanzu-java-web-app
+   image-provider     False     Unknown   48s       not found
+   config-provider    False     Unknown   48s       not found
+   app-config         False     Unknown   48s       not found
+   service-bindings   False     Unknown   48s       not found
+   api-descriptors    False     Unknown   48s       not found
+   config-writer      False     Unknown   48s       not found
 
 🚚 Delivery
    name:   delivery-basic
 
    NAME              READY   HEALTHY   UPDATED   RESOURCE
-   source-provider   False   False     26s       imagerepositories.source.apps.tanzu.vmware.com/tanzu-java-web-app-delivery
-   deployer          False   Unknown   29s       not found
+   source-provider   False   False     27s       imagerepositories.source.apps.tanzu.vmware.com/tanzu-java-web-app-delivery
+   deployer          False   Unknown   31s       not found
 
 💬 Messages
    Workload [MissingValueAtPath]:   waiting to read value [.status.latestImage] from resource [images.kpack.io/tanzu-java-web-app] in namespace [default]
+   Workload [HealthyConditionRule]:   Tasks Completed: 0 (Failed: 0, Cancelled 0), Incomplete: 1, Skipped: 0
    Deliverable [HealthyConditionRule]:   Unable to resolve image with tag "accwest.azurecr.io/tap/tanzu-java-web-app-default-bundle:edd8a493-6b41-4f3e-a33c-6d1865e7b125" to a digest: HEAD https://accwest.azurecr.io/v2/tap/tanzu-java-web-app-default-bundle/manifests/edd8a493-6b41-4f3e-a33c-6d1865e7b125: unexpected status code 404 Not Found (HEAD responses have no body, use GET for details)
 
 🛶 Pods
-   NAME                                   READY   STATUS      RESTARTS   AGE
-   tanzu-java-web-app-build-1-build-pod   0/1     Init:1/6    0          3s
-   tanzu-java-web-app-kjtb4-test-pod      0/1     Completed   0          24s
+   NAME                                READY   STATUS    RESTARTS   AGE
+   tanzu-java-web-app-fmkhx-test-pod   1/1     Running   0          24s
 
 To see logs: "tanzu apps workload tail tanzu-java-web-app --timestamp --since 1h"
 ```
@@ -84,6 +84,13 @@ waiting to read value [.status.latestImage] from resource [images.kpack.io/tanzu
 ```
 
 It's not obvious what `MissingValueAtPath` refers to. This is again due to the build just getting started.
+
+There is also another message `Workload [HealthyConditionRule]` that says
+```
+Tasks Completed: 0 (Failed: 0, Cancelled 0), Incomplete: 1, Skipped: 0
+```
+
+It is not clear what this refers to, I assume the test step.
 
 ## Ask
 
